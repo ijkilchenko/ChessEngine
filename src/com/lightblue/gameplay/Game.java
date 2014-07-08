@@ -112,9 +112,12 @@ public class Game {
 	}
 
 	public boolean isGamePlayable() {
-		if (status.equals(Status.ACTIVE)) {
+		if (status.equals(Status.ACTIVE) && getCurrentBoard().getMovesCount() <= 500) {
 			return true;
 		} else {
+			if (getCurrentBoard().getMovesCount() > 50){
+				System.out.println("500 moves without capture reached! -> Draw");
+			}
 			return false;
 		}
 	}

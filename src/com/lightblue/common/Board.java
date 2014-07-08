@@ -12,6 +12,7 @@ public class Board {
 
 	private Map<Position, Piece> map;
 	public List<Piece> graveyard;
+	public int movesCount; 
 	public static int min = 0;
 	public static int max = 7;
 
@@ -19,6 +20,7 @@ public class Board {
 
 	public Board() {
 		map = new HashMap<Position, Piece>();
+		movesCount = 0;
 		graveyard = new ArrayList<Piece>();
 	}
 
@@ -147,6 +149,14 @@ public class Board {
 		return newGraveyard;
 	}
 
+	public int getMovesCount() {
+		return movesCount;
+	}
+
+	public void setMovesCount(int movesCount) {
+		this.movesCount = movesCount;
+	}
+
 	public static Board getStartingBoard(Board board) {
 
 		for (int i = min; i <= max; i++) {
@@ -248,6 +258,7 @@ public class Board {
 		boardCopy.setMap(map);
 
 		boardCopy.setGraveyard(Board.copyGraveyard(board.graveyard));
+		boardCopy.setMovesCount(board.getMovesCount());
 		return boardCopy;
 	}
 
@@ -310,6 +321,7 @@ public class Board {
 		if (oldPiece != null) {
 			oldPiece.die();
 			graveyard.add(oldPiece);
+			movesCount = 0;
 		}
 		map.put(pos, piece);
 	}
@@ -329,6 +341,7 @@ public class Board {
 	public void applyMove(Move move) {
 		Move localMove = new Move();
 		localMove = move;
+		movesCount++;
 
 		isLastMoveBigStep = null;
 		if (localMove.getClass() == EnPassant.class) {
@@ -350,6 +363,7 @@ public class Board {
 				if (tupImage.getPos() == null) {
 					piece.die();
 					graveyard.add(piece);
+					movesCount = 0;
 				} else {
 
 					if (piece.getClass() == Pawn.class && Math.abs(pos1.getY() - tupImage.getPos().getY()) == 2) {
@@ -386,6 +400,7 @@ public class Board {
 				Piece thisPiece = getPieceAtPos(pos1);
 				thisPiece.die();
 				graveyard.add(thisPiece);
+				movesCount = 0;
 
 				Position localPos = getLocalPos(pos1);
 
