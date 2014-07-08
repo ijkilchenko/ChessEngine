@@ -1,4 +1,4 @@
-package com.lightblue;
+package com.lightblue.common;
 
 public class Piece {
 
@@ -19,6 +19,10 @@ public class Piece {
 		this.hasMoved = false;
 		this.mycolor = color;
 		this.mystate = Piece.State.ALIVE;
+	}
+
+	public String getTextOfColor() {
+		return (mycolor.equals(Color.WHITE) ? "w" : "b");
 	}
 
 	public static Piece copyPiece(Piece piece) {

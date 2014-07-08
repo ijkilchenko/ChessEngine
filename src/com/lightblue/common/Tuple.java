@@ -1,7 +1,7 @@
-package com.lightblue;
+package com.lightblue.common;
 
 public class Tuple {
-	
+
 	public final Position pos;
 	public final Piece piece;
 
@@ -17,5 +17,5 @@ public class Tuple {
 	public Piece getPiece() {
 		return piece;
 	}
-	
+
 }

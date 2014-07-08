@@ -1,11 +1,13 @@
-package com.lightblue;
+package com.lightblue.common;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Rook extends Piece {
+public class Bishop extends Piece {
 
-	public Rook(Color color) {
+	public final static String text = "B";
+	
+	public Bishop(Color color) {
 		super(color);
 	}
 
@@ -14,16 +16,15 @@ public class Rook extends Piece {
 	}
 
 	public static List<Move> getAllMoves(Board board, Piece thisPiece) {
-
 		Position pos = board.getPositionOfPiece(thisPiece);
 
 		List<Move> moves = new ArrayList<Move>();
 		if (thisPiece.mystate == Piece.State.DEAD) {
-			return null;
+			return new ArrayList<Move>();
 		}
 
-		// Up
-		Position newPos = new Position(pos.getX(), pos.getY() + 1);
+		// Up-Right
+		Position newPos = new Position(pos.getX() + 1, pos.getY() + 1);
 		while (board.isInside(newPos)) {
 			if (board.getPieceAtPos(newPos) == null) {
 				Move move = new Move(thisPiece, pos, newPos);
@@ -38,11 +39,11 @@ public class Rook extends Piece {
 					break;
 				}
 			}
-			newPos = new Position(newPos.getX(), newPos.getY() + 1);
+			newPos = new Position(newPos.getX() + 1, newPos.getY() + 1);
 		}
 
-		// Down
-		newPos = new Position(pos.getX(), pos.getY() - 1);
+		// Down-Right
+		newPos = new Position(pos.getX() + 1, pos.getY() - 1);
 		while (board.isInside(newPos)) {
 			if (board.getPieceAtPos(newPos) == null) {
 				Move move = new Move(thisPiece, pos, newPos);
@@ -57,11 +58,11 @@ public class Rook extends Piece {
 					break;
 				}
 			}
-			newPos = new Position(newPos.getX(), newPos.getY() - 1);
+			newPos = new Position(newPos.getX() + 1, newPos.getY() - 1);
 		}
 
-		// Left
-		newPos = new Position(pos.getX() - 1, pos.getY());
+		// Left-Up
+		newPos = new Position(pos.getX() - 1, pos.getY() + 1);
 		while (board.isInside(newPos)) {
 			if (board.getPieceAtPos(newPos) == null) {
 				Move move = new Move(thisPiece, pos, newPos);
@@ -76,11 +77,11 @@ public class Rook extends Piece {
 					break;
 				}
 			}
-			newPos = new Position(newPos.getX() - 1, newPos.getY());
+			newPos = new Position(newPos.getX() - 1, newPos.getY() + 1);
 		}
 
-		// Right
-		newPos = new Position(pos.getX() + 1, pos.getY());
+		// Left-Down
+		newPos = new Position(pos.getX() - 1, pos.getY() - 1);
 		while (board.isInside(newPos)) {
 			if (board.getPieceAtPos(newPos) == null) {
 				Move move = new Move(thisPiece, pos, newPos);
@@ -95,7 +96,7 @@ public class Rook extends Piece {
 					break;
 				}
 			}
-			newPos = new Position(newPos.getX() + 1, newPos.getY());
+			newPos = new Position(newPos.getX() - 1, newPos.getY() - 1);
 		}
 
 		return moves;

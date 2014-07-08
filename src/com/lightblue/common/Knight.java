@@ -1,10 +1,12 @@
-package com.lightblue;
+package com.lightblue.common;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Knight extends Piece {
 
+	public final static String text = "N";
+	
 	public Knight(Color color) {
 		super(color);
 	}
@@ -17,7 +19,7 @@ public class Knight extends Piece {
 
 		List<Move> moves = new ArrayList<Move>();
 		if (currentPiece.mystate == Piece.State.DEAD) {
-			return null;
+			return new ArrayList<Move>();
 		}
 
 		Position pos = board.getPositionOfPiece(currentPiece);

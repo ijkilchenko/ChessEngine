@@ -1,7 +1,19 @@
-package com.lightblue;
+package com.lightblue.common.test;
+
+import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Test;
+
+import com.lightblue.common.Board;
+import com.lightblue.common.EnPassant;
+import com.lightblue.common.King;
+import com.lightblue.common.Move;
+import com.lightblue.common.Pawn;
+import com.lightblue.common.Piece;
+import com.lightblue.common.Position;
+import com.lightblue.common.Queen;
+import com.lightblue.common.Rook;
 
 public class MoveTest {
 
@@ -51,20 +63,22 @@ public class MoveTest {
 	public void enPassantMoveTest() {
 
 		Board board = new Board();
-		
-		Position kingPos = new Position(7,7);
+
+		Position kingPos = new Position(7, 7);
 		King king = new King(Piece.Color.WHITE);
 		board.putPieceAtPos(kingPos, king);
-		
+
 		Position pos1 = new Position(5, 6);
 		Pawn blackPawn = new Pawn(Piece.Color.BLACK);
 		board.putPieceAtPos(pos1, blackPawn);
+		board.drawBoard();
 		Assert.assertEquals(2, Pawn.getAllMoves(board, blackPawn).size());
 
 		Position pos2 = new Position(5, 4);
 		Move blackPawnMove = new Move(blackPawn, pos1, pos2);
 		Assert.assertTrue(board.isLastMoveBigStep == null);
 		board.applyMove(blackPawnMove);
+		board.drawBoard();
 		Assert.assertEquals(1, Pawn.getAllMoves(board, blackPawn).size());
 		Assert.assertTrue(board.isLastMoveBigStep.equals(blackPawn));
 
@@ -72,10 +86,15 @@ public class MoveTest {
 		Position pos4 = new Position(5, 5);
 		Pawn whitePawn = new Pawn(Piece.Color.WHITE);
 		board.putPieceAtPos(pos3, whitePawn);
+		board.drawBoard();
 		Assert.assertEquals(2, Pawn.getAllMoves(board, whitePawn).size());
-		Move whitePawnMove = new Move(whitePawn, pos3, pos4);
-		Assert.assertTrue(Move.isMoveValid(whitePawnMove, board, Piece.Color.WHITE));
-		board.applyMove(whitePawnMove);
+		List<Move> allWhitePawnMoves = Pawn.getAllMoves(board, whitePawn);
+		for (Move move : allWhitePawnMoves) {
+			if (move.getClass() == EnPassant.class) {
+				board.applyMove(move);
+			}
+		}
+		board.drawBoard();
 		Assert.assertEquals(1, Pawn.getAllMoves(board, whitePawn).size());
 		Assert.assertTrue(board.isLastMoveBigStep == null);
 

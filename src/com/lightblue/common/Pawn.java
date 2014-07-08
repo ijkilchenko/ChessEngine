@@ -1,9 +1,11 @@
-package com.lightblue;
+package com.lightblue.common;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Pawn extends Piece {
+	
+	public final static String text = "P";
 
 	public Pawn(Color color) {
 		super(color);
@@ -16,7 +18,7 @@ public class Pawn extends Piece {
 	public static List<Move> getAllMoves(Board board, Piece currentPiece) {
 		List<Move> moves = new ArrayList<Move>();
 		if (currentPiece.mystate == Piece.State.DEAD) {
-			return null;
+			return new ArrayList<Move>();
 		}
 		Position pos = board.getPositionOfPiece(currentPiece);
 
@@ -34,7 +36,7 @@ public class Pawn extends Piece {
 		} else {
 			Position newPos = new Position(pos.getX(), pos.getY() - 1);
 			if (board.isInside(newPos) && board.getPieceAtPos(newPos) == null) {
-				if (newPos.getY() == 7) {
+				if (newPos.getY() == 0) {
 					// Become queen
 					moves.add(new Move(currentPiece, pos, new Queen(Piece.Color.BLACK), newPos));
 				} else {

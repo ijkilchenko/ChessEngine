@@ -1,14 +1,20 @@
-package com.lightblue;
+package com.lightblue.common.test;
 
 import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Test;
 
+import com.lightblue.common.Board;
+import com.lightblue.common.Move;
+import com.lightblue.common.Piece;
+import com.lightblue.common.Position;
+import com.lightblue.common.Queen;
+
 public class QueenTest {
 
 	@Test
-	public void getAllMovesTest(){
+	public void getAllMovesTest() {
 		Board board = new Board();
 		Position pos1 = new Position(0, 1);
 		Queen queen1 = new Queen(Piece.Color.WHITE);

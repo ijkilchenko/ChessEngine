@@ -1,4 +1,4 @@
-package com.lightblue;
+package com.lightblue.common;
 
 public class Position {
 
@@ -15,6 +15,9 @@ public class Position {
 	}
 
 	public static Position copyPosition(Position pos) {
+		if (pos == null) {
+			return null;
+		}
 		Position newPos = new Position(pos.getX(), pos.getY());
 		return newPos;
 	}
@@ -49,7 +52,7 @@ public class Position {
 	}
 
 	public color getColor() {
-		return (X + Y) % 2 == 0 ? color.WHITE : color.BLACK;
+		return (X + Y) % 2 == 0 ? color.BLACK : color.WHITE;
 	}
 
 	public String getString() {
@@ -58,6 +61,14 @@ public class Position {
 		String position = "";
 		position += letters.substring(X, X + 1) + numbers.substring(Y, Y + 1);
 		return position;
+	}
+
+	public static Position convertStringToPosition(String str) {
+		String numbers = "12345678";
+		String letters = "abcdefgh";
+		Position pos = new Position(letters.indexOf(str.substring(0, 1)), numbers.indexOf(str.substring(1)));
+		
+		return pos;
 	}
 
 }
