@@ -20,9 +20,10 @@ public class ConsoleGame {
 		Scanner in = new Scanner(System.in);
 
 		int movesCountLimit = 600;
-		while (game.isGamePlayable() && game.boards.size() < movesCountLimit) {
+		int i = 0;
+		while (game.isGamePlayable() && i < movesCountLimit) {
 			game.getCurrentBoard().drawBoard();
-			Move inputMove = null;
+/*			Move inputMove = null;
 			while (inputMove == null) {
 				System.out.println("Enter a move! ");
 				String inputMoveString = in.nextLine();
@@ -33,9 +34,18 @@ public class ConsoleGame {
 				}
 			}
 			System.out.println("You entered: " + ConsoleGame.convertMoveToString(inputMove));
+			game.applyMoveToGame(inputMove);*/
 
-			game.applyMoveToGame(inputMove);
-
+			if (!game.isGamePlayable()) {
+				break;
+			} else {
+				// Engine's move
+				Move engineMove = game.generateNextMove();
+				System.out.println("Applying move: " + ConsoleGame.convertMoveToString(engineMove));
+				game.applyMoveToGame(engineMove);
+			}
+			System.out.println("Move " + i);
+			i++;
 		}
 		in.close();
 		game.getCurrentBoard().drawBoard();

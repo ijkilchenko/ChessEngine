@@ -36,4 +36,22 @@ public class PawnTest {
 		Assert.assertEquals(2, moves3.size());
 	}
 
+	@Test
+	public void becomeQueenTest() {
+
+		Board board = new Board();
+		Position pos1 = new Position(0, 6);
+		Pawn pawn1 = new Pawn(Piece.Color.WHITE);
+		board.putPieceAtPos(pos1, pawn1);
+
+		List<Move> whiteMoves = Board.getAllValidMoves(board, Piece.Color.WHITE);
+		Assert.assertEquals(1, whiteMoves.size());
+		board.drawBoard();
+		board.applyMove(whiteMoves.get(0));
+		board.drawBoard();
+		List<Move> newQueenMoves = Board.getAllValidMoves(board, Piece.Color.WHITE);
+		Assert.assertEquals(21, newQueenMoves.size());
+
+	}
+
 }

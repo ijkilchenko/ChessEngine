@@ -347,12 +347,18 @@ public class Board {
 				piece = tupImage.getPiece();
 				piece.setHasMoved(true);
 
-				if (piece.getClass() == Pawn.class && Math.abs(pos1.getY() - tupImage.getPos().getY()) == 2) {
-					Pawn thisPawn = (Pawn) piece;
-					isLastMoveBigStep = thisPawn;
-				}
+				if (tupImage.getPos() == null) {
+					piece.die();
+					graveyard.add(piece);
+				} else {
 
-				putPieceAtPos(tupImage.getPos(), piece);
+					if (piece.getClass() == Pawn.class && Math.abs(pos1.getY() - tupImage.getPos().getY()) == 2) {
+						Pawn thisPawn = (Pawn) piece;
+						isLastMoveBigStep = thisPawn;
+					}
+
+					putPieceAtPos(tupImage.getPos(), piece);
+				}
 			}
 		}
 
