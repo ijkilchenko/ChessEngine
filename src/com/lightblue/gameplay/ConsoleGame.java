@@ -23,7 +23,7 @@ public class ConsoleGame {
 		int i = 0;
 		while (game.isGamePlayable() && i < movesCountLimit) {
 			game.getCurrentBoard().drawBoard();
-/*			Move inputMove = null;
+			Move inputMove = null;
 			while (inputMove == null) {
 				System.out.println("Enter a move! ");
 				String inputMoveString = in.nextLine();
@@ -34,7 +34,7 @@ public class ConsoleGame {
 				}
 			}
 			System.out.println("You entered: " + ConsoleGame.convertMoveToString(inputMove));
-			game.applyMoveToGame(inputMove);*/
+			game.applyMoveToGame(inputMove);
 
 			if (!game.isGamePlayable()) {
 				break;

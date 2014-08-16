@@ -33,7 +33,7 @@ public class Game {
 		if (isGamePlayable()) {
 			List<Move> moves = Board.getAllValidMoves(getCurrentBoard(), getCurrentMoveColor());
 
-			return Decisor.getBestMove(getCurrentBoard(), moves);
+			return Decisor.getBestMove(getCurrentBoard(), moves, getCurrentMoveColor());
 		} else {
 			return null;
 		}
@@ -116,7 +116,7 @@ public class Game {
 			return true;
 		} else {
 			if (getCurrentBoard().getMovesCount() > 50){
-				System.out.println("500 moves without capture reached! -> Draw");
+				System.out.println("50 moves without capture reached! -> Draw");
 			}
 			return false;
 		}

@@ -10,6 +10,10 @@ import com.lightblue.common.Piece.Color;
 public class Move {
 
 	protected Map<Tuple, Tuple> map;
+	
+	public Piece pieceAttacked = null;
+	
+	public Piece pieceDefending = null;
 
 	public Map<Tuple, Tuple> getMap() {
 		return map;
@@ -17,6 +21,22 @@ public class Move {
 
 	public void setMap(Map<Tuple, Tuple> map) {
 		this.map = map;
+	}
+
+	public Piece getPieceAtFinish() {
+		return pieceAttacked;
+	}
+
+	public void setPieceAttacked(Piece pieceAttacked) {
+		this.pieceAttacked = pieceAttacked;
+	}
+
+	public Piece getPieceDefending() {
+		return pieceDefending;
+	}
+
+	public void setPieceDefending(Piece pieceDefending) {
+		this.pieceDefending = pieceDefending;
 	}
 
 	public Move() {
@@ -48,7 +68,7 @@ public class Move {
 
 	}
 
-	private static Move copyMove(Board boardCopy, Move move) {
+	public static Move copyMove(Board boardCopy, Move move) {
 
 		Move moveCopy;
 		if (move.getClass() == EnPassant.class) {

@@ -66,6 +66,7 @@ public class King extends Piece {
 			} else if (board.getPieceAtPos(newPos).mycolor != currentPiece.mycolor) {
 				Move move = new Move(currentPiece, pos, newPos);
 				if (!isOtherKingNearby(board, newPos, currentPiece.mycolor)) {
+					move.setPieceAttacked(board.getPieceAtPos(newPos));
 					moves.add(move);
 				}
 			}

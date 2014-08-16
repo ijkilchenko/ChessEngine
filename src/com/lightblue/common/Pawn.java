@@ -68,7 +68,9 @@ public class Pawn extends Piece {
 				moves = doEnPassantIfPossible(board, currentPiece, moves, pos, newPos, adjacentPos);
 				if (moves.size() == currentNumOfMoves && board.getPieceAtPos(newPos) != null
 						&& board.getPieceAtPos(newPos).mycolor == Piece.Color.BLACK) {
-					moves.add(new Move(currentPiece, pos, newPos));
+					Move move = new Move(currentPiece, pos, newPos);
+					move.setPieceAttacked(board.getPieceAtPos(newPos));
+					moves.add(move);
 				}
 			}
 			newPos = new Position(pos.getX() - 1, pos.getY() + 1);
@@ -78,7 +80,9 @@ public class Pawn extends Piece {
 				moves = doEnPassantIfPossible(board, currentPiece, moves, pos, newPos, adjacentPos);
 				if (moves.size() == currentNumOfMoves && board.getPieceAtPos(newPos) != null
 						&& board.getPieceAtPos(newPos).mycolor == Piece.Color.BLACK) {
-					moves.add(new Move(currentPiece, pos, newPos));
+					Move move = new Move(currentPiece, pos, newPos);
+					move.setPieceAttacked(board.getPieceAtPos(newPos));
+					moves.add(move);
 				}
 			}
 		} else if (currentPiece.mycolor == Piece.Color.BLACK) {
@@ -89,7 +93,9 @@ public class Pawn extends Piece {
 				moves = doEnPassantIfPossible(board, currentPiece, moves, pos, newPos, adjacentPos);
 				if (moves.size() == currentNumOfMoves && board.getPieceAtPos(newPos) != null
 						&& board.getPieceAtPos(newPos).mycolor == Piece.Color.WHITE) {
-					moves.add(new Move(currentPiece, pos, newPos));
+					Move move = new Move(currentPiece, pos, newPos);
+					move.setPieceAttacked(board.getPieceAtPos(newPos));
+					moves.add(move);
 				}
 			}
 			newPos = new Position(pos.getX() - 1, pos.getY() - 1);
@@ -99,7 +105,9 @@ public class Pawn extends Piece {
 				moves = doEnPassantIfPossible(board, currentPiece, moves, pos, newPos, adjacentPos);
 				if (moves.size() == currentNumOfMoves && board.getPieceAtPos(newPos) != null
 						&& board.getPieceAtPos(newPos).mycolor == Piece.Color.WHITE) {
-					moves.add(new Move(currentPiece, pos, newPos));
+					Move move = new Move(currentPiece, pos, newPos);
+					move.setPieceAttacked(board.getPieceAtPos(newPos));
+					moves.add(move);
 				}
 			}
 		}
@@ -114,6 +122,8 @@ public class Pawn extends Piece {
 		if (adjacentPiece != null && adjacentPiece.mycolor != myPawnColor && adjacentPiece.getClass() == Pawn.class) {
 			Pawn adjacentPawn = (Pawn) adjacentPiece;
 			if (board.isLastMoveBigStep != null && board.isLastMoveBigStep == adjacentPawn) {
+				EnPassant enPassant = new EnPassant((Pawn) currentPiece, pos, newPos, adjacentPiece, adjacentPos);
+				enPassant.setPieceAttacked(adjacentPawn);
 				moves.add(new EnPassant((Pawn) currentPiece, pos, newPos, adjacentPiece, adjacentPos));
 			}
 		}

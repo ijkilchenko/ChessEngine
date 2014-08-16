@@ -63,6 +63,7 @@ public class Knight extends Piece {
 				moves.add(move);
 			} else if (board.getPieceAtPos(newPos).mycolor != currentPiece.mycolor) {
 				Move move = new Move(currentPiece, pos, newPos);
+				move.setPieceAttacked(board.getPieceAtPos(newPos));
 				moves.add(move);
 			}
 

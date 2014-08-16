@@ -6,7 +6,7 @@ import java.util.List;
 public class Rook extends Piece {
 
 	public final static String text = "R";
-	
+
 	public Rook(Color color) {
 		super(color);
 	}
@@ -25,18 +25,25 @@ public class Rook extends Piece {
 		}
 
 		// Up
+		int startCount = 0; 
 		Position newPos = new Position(pos.getX(), pos.getY() + 1);
 		while (board.isInside(newPos)) {
 			if (board.getPieceAtPos(newPos) == null) {
 				Move move = new Move(thisPiece, pos, newPos);
 				moves.add(move);
 			} else {
-				if (board.getPieceAtPos(newPos).mycolor != thisPiece.mycolor) {
+				Piece pieceAtFinish = board.getPieceAtPos(newPos);
+
+				if (pieceAtFinish.mycolor != thisPiece.mycolor) {
 					Move move = new Move(thisPiece, pos, newPos);
+					move.setPieceAttacked(pieceAtFinish);
 					moves.add(move);
 					break;
 				}
-				if (board.getPieceAtPos(newPos).mycolor == thisPiece.mycolor) {
+				if (pieceAtFinish.mycolor == thisPiece.mycolor) {
+					for (int i = startCount; i < moves.size(); i++){
+						moves.get(i).setPieceDefending(pieceAtFinish);
+					}
 					break;
 				}
 			}
@@ -44,18 +51,24 @@ public class Rook extends Piece {
 		}
 
 		// Down
+		startCount = moves.size(); 
 		newPos = new Position(pos.getX(), pos.getY() - 1);
 		while (board.isInside(newPos)) {
 			if (board.getPieceAtPos(newPos) == null) {
 				Move move = new Move(thisPiece, pos, newPos);
 				moves.add(move);
 			} else {
-				if (board.getPieceAtPos(newPos).mycolor != thisPiece.mycolor) {
+				Piece pieceAtFinish = board.getPieceAtPos(newPos);
+				if (pieceAtFinish.mycolor != thisPiece.mycolor) {
 					Move move = new Move(thisPiece, pos, newPos);
+					move.setPieceAttacked(pieceAtFinish);
 					moves.add(move);
 					break;
 				}
-				if (board.getPieceAtPos(newPos).mycolor == thisPiece.mycolor) {
+				if (pieceAtFinish.mycolor == thisPiece.mycolor) {
+					for (int i = startCount; i < moves.size(); i++){
+						moves.get(i).setPieceDefending(pieceAtFinish);
+					}
 					break;
 				}
 			}
@@ -63,18 +76,24 @@ public class Rook extends Piece {
 		}
 
 		// Left
+		startCount = moves.size(); 
 		newPos = new Position(pos.getX() - 1, pos.getY());
 		while (board.isInside(newPos)) {
 			if (board.getPieceAtPos(newPos) == null) {
 				Move move = new Move(thisPiece, pos, newPos);
 				moves.add(move);
 			} else {
-				if (board.getPieceAtPos(newPos).mycolor != thisPiece.mycolor) {
+				Piece pieceAtFinish = board.getPieceAtPos(newPos);
+				if (pieceAtFinish.mycolor != thisPiece.mycolor) {
 					Move move = new Move(thisPiece, pos, newPos);
+					move.setPieceAttacked(pieceAtFinish);
 					moves.add(move);
 					break;
 				}
-				if (board.getPieceAtPos(newPos).mycolor == thisPiece.mycolor) {
+				if (pieceAtFinish.mycolor == thisPiece.mycolor) {
+					for (int i = startCount; i < moves.size(); i++){
+						moves.get(i).setPieceDefending(pieceAtFinish);
+					}
 					break;
 				}
 			}
@@ -82,18 +101,24 @@ public class Rook extends Piece {
 		}
 
 		// Right
+		startCount = moves.size();
 		newPos = new Position(pos.getX() + 1, pos.getY());
 		while (board.isInside(newPos)) {
 			if (board.getPieceAtPos(newPos) == null) {
 				Move move = new Move(thisPiece, pos, newPos);
 				moves.add(move);
 			} else {
-				if (board.getPieceAtPos(newPos).mycolor != thisPiece.mycolor) {
+				Piece pieceAtFinish = board.getPieceAtPos(newPos);
+				if (pieceAtFinish.mycolor != thisPiece.mycolor) {
 					Move move = new Move(thisPiece, pos, newPos);
+					move.setPieceAttacked(pieceAtFinish);
 					moves.add(move);
 					break;
 				}
-				if (board.getPieceAtPos(newPos).mycolor == thisPiece.mycolor) {
+				if (pieceAtFinish.mycolor == thisPiece.mycolor) {
+					for (int i = startCount; i < moves.size(); i++){
+						moves.get(i).setPieceDefending(pieceAtFinish);
+					}
 					break;
 				}
 			}
